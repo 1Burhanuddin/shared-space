@@ -28,6 +28,7 @@ create table if not exists public.profiles (
 create table if not exists public.workspaces (
   id          uuid primary key default gen_random_uuid(),
   name        text not null,
+  join_code   text unique,
   owner_id    uuid not null references public.profiles(id) on delete cascade,
   created_at  timestamptz not null default now()
 );
