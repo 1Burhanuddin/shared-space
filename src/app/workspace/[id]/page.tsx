@@ -9,6 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import NotesBoard, { type Note } from "@/components/notes/notes-board";
 
 export default async function WorkspacePage({
   params,
@@ -35,9 +36,18 @@ export default async function WorkspacePage({
     .select("*", { count: "exact", head: true })
     .eq("workspace_id", id);
 
+  const { data: notesData } = await supabase
+    .from("notes")
+    .select("id, title, content, color")
+    .eq("workspace_id", id)
+    .is("deleted_at", null)
+    .order("updated_at", { ascending: false });
+
+  const notes = (notesData ?? []) as Note[];
+
   return (
     <div className="min-h-screen bg-muted/30 p-6">
-      <div className="mx-auto max-w-3xl space-y-6">
+      <div className="mx-auto max-w-4xl space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-semibold">{workspace.name}</h1>
@@ -64,17 +74,7 @@ export default async function WorkspacePage({
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Notes</CardTitle>
-            <CardDescription>Coming up next.</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="flex h-32 items-center justify-center rounded-md border border-dashed text-sm text-muted-foreground">
-              Notes will appear here
-            </div>
-          </CardContent>
-        </Card>
+        <NotesBoard workspaceId={id} initialNotes={notes} />
       </div>
     </div>
   );
