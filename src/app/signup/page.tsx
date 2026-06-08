@@ -30,7 +30,7 @@ export default async function SignupPage({
               {params.error}
             </p>
           )}
-          <form className="flex flex-col gap-4">
+          <form action={signup} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="name">Name</Label>
               <Input id="name" name="name" type="text" required />
@@ -49,7 +49,7 @@ export default async function SignupPage({
                 required
               />
             </div>
-            <Button formAction={signup} className="w-full">
+            <Button type="submit" className="w-full">
               Sign up
             </Button>
           </form>

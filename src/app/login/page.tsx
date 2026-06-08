@@ -35,7 +35,7 @@ export default async function LoginPage({
               {params.error}
             </p>
           )}
-          <form className="flex flex-col gap-4">
+          <form action={login} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="email">Email</Label>
               <Input id="email" name="email" type="email" required />
@@ -44,7 +44,7 @@ export default async function LoginPage({
               <Label htmlFor="password">Password</Label>
               <Input id="password" name="password" type="password" required />
             </div>
-            <Button formAction={login} className="w-full">
+            <Button type="submit" className="w-full">
               Sign in
             </Button>
           </form>
