@@ -30,12 +30,12 @@ export default async function NewWorkspacePage({
               {params.error}
             </p>
           )}
-          <form className="flex flex-col gap-4">
+          <form action={createWorkspace} className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <Label htmlFor="name">Workspace name</Label>
               <Input id="name" name="name" type="text" required autoFocus />
             </div>
-            <Button formAction={createWorkspace} className="w-full">
+            <Button type="submit" className="w-full">
               Create workspace
             </Button>
           </form>
